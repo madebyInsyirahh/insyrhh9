@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BookHub Store - About Us</title>
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- SAME CSS FILE AS OTHER PAGES -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header class="header">
+    <div class="logo">
+        <a href="home.html">
+            <img src="logo.png" alt="BookHub Logo">
+        </a>
+    </div>
+
+    <div class="search-bar">
+        <input type="text" id="pageSearch" placeholder="Search for books..." onkeypress="pageSearch(event)">
+        <button type="button" onclick="pageSearch()">Search</button>
+    </div>
+
+    <div class="login-section" id="authSection"></div>
+</header>
+
+<!-- NAVIGATION -->
+<nav class="navbar">
+    <div class="nav-links">
+        <a href="promotions.html">Promotions</a>
+        <a href="stores.html">Store Locations</a>
+        <a href="authors.html">Authors</a>
+        <a href="categories.html">Categories</a>
+        <a href="about.html" class="active">About Us</a>
+        <a href="help.html">Help & Support</a>
+    </div>
+
+    <a href="payment.html" class="payment-section">
+        <i class="fa-solid fa-cart-shopping"></i>
+        <span class="amount">RM <span id="cartTotal">0.00</span></span>
+    </a>
+</nav>
+
+<!-- ABOUT CONTENT -->
+<main class="about-container">
+
+    <header class="page-header">
+        <h1 class="page-title">About Us</h1>
+        <p class="page-subtitle">Discover our story and the passion behind BookHub Store</p>
+    </header>
+
+    <section class="mission-box">
+        <h2 class="mission-title">Our Mission</h2>
+        <p class="mission-text">
+            At BookHub Store, we believe that books have the power to transform lives,
+            spark imagination, and connect people across cultures and generations.
+            Our mission is to make quality literature accessible to everyone,
+            fostering a community of passionate readers.
+        </p>
+    </section>
+
+    <section class="team-section">
+        <h2 class="team-title">Meet Our Team</h2>
+
+        <div class="team-grid">
+            <div class="team-member">
+                <div class="profile-picture">
+                    <img src="profile-picture-Insyirah.jpeg"
+                         class="profile-img"
+                         alt="Profile photo of Nur Insyirah">
+                </div>
+                <h3 class="member-name">Nur Insyirah</h3>
+            </div>
+
+            <div class="team-member">
+                <div class="profile-picture">
+                    <img src="profile-picture-Amani.jpeg"
+                         class="profile-img"
+                         alt="Profile photo of Nailie Amani">
+                </div>
+                <h3 class="member-name">Nailie Amani</h3>
+            </div>
+
+            <div class="team-member">
+                <div class="profile-picture">
+                    <img src="profile-picture-Yan.jpg"
+                         class="profile-img"
+                         alt="Profile photo of Khadijah Khalisah">
+                </div>
+                <h3 class="member-name">Khadijah Khalisah</h3>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="footer">
+    <p>&copy; 2025 BookHub Store. All rights reserved.</p>
+</footer>
+
+<!-- SAME JS FILE -->
+<script src="script.js"></script>
+
+<script>
+    function pageSearch(event) {
+        if (event && event.key && event.key !== 'Enter') return;
+        alert('Go to Categories page to search for books.');
+        window.location.href = 'categories.html';
+    }
+</script>
+</body>
+</html>

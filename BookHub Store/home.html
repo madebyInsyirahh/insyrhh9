@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BookHub Store - Home Page</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+
+    <div class="logo">
+        <a href="home.html">
+            <img src="logo.png" alt="BookHub Logo">
+        </a>
+    </div>
+
+    <div class="search-bar">
+        <input type="text" id="homeSearch" placeholder="Search for books, authors, categories" onkeypress="searchHome(event)">
+        <button type="button" onclick="searchHome()">Search</button>
+    </div>
+
+    <div class="login-section" id="authSection"></div>
+
+</header>
+
+<!-- NAVIGATION -->
+<nav class="navbar top-nav">
+
+    <div class="nav-links">
+        <a href="promotions.html">Promotions</a>
+        <a href="stores.html">Store Locations</a>
+        <a href="authors.html">Authors</a>
+        <a href="categories.html">Categories</a>
+        <a href="about.html">About Us</a>
+        <a href="help.html">Help & Support</a>
+    </div>
+
+    <a href="payment.html" class="payment-section">
+        <i class="fa-solid fa-cart-shopping"></i>
+        RM <span id="cartTotal">0.00</span>
+    </a>
+
+</nav>
+
+<!-- BANNER -->
+<section class="banner">
+    <div class="banner-content">
+        <h2>Welcome to BookHub Store</h2>
+        <p>Discover your next favorite book with our curated collection</p>
+        <button onclick="document.querySelector('.featured-book').scrollIntoView({behavior: 'smooth'})" style="background: #4F9EB4; color: white; border: none; padding: 12px 25px; border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 16px;">Explore Books</button>
+    </div>
+    <div style="display: flex; gap: 15px; width: 100%;">
+        <img src="banner.png" alt="BookHub banner 2" style="width: 50%; max-height: 400px; object-fit: cover; border-radius: 10px;">
+    </div>
+</section>
+
+<!-- FEATURED BOOKS -->
+<section class="featured-book">
+    <h2>Featured Books of the Month</h2>
+
+    <div class="book-details">
+
+        <article class="book-info">
+            <div class="book-cover" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); display: flex; align-items: center; justify-content: center; color: white; font-size: 40px;">
+                <i class="fa-solid fa-book"></i>
+            </div>
+            <h3>The Great Adventure</h3>
+            <p>by John Doe</p>
+            <p class="price">RM 40.00</p>
+            <button onclick="addToCart('The Great Adventure', 40.00)">Add to Cart</button>
+        </article>
+
+        <article class="book-info">
+            <div class="book-cover" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); display: flex; align-items: center; justify-content: center; color: white; font-size: 40px;">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </div>
+            <h3>Mystery of the Lost City</h3>
+            <p>by Jane Smith</p>
+            <p class="price">RM 38.00</p>
+            <button onclick="addToCart('Mystery of the Lost City', 38.00)">Add to Cart</button>
+        </article>
+
+        <article class="book-info">
+            <div class="book-cover" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); display: flex; align-items: center; justify-content: center; color: white; font-size: 40px;">
+                <i class="fa-solid fa-flask"></i>
+            </div>
+            <h3>Science Wonders</h3>
+            <p>by Dr. Albert</p>
+            <p class="price">RM 42.00</p>
+            <button onclick="addToCart('Science Wonders', 42.00)">Add to Cart</button>
+        </article>
+
+        <article class="book-info">
+            <div class="book-cover" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); display: flex; align-items: center; justify-content: center; color: white; font-size: 40px;">
+                <i class="fa-solid fa-utensils"></i>
+            </div>
+            <h3>Cooking Made Easy</h3>
+            <p>by Chef Emma</p>
+            <p class="price">RM 35.00</p>
+            <button onclick="addToCart('Cooking Made Easy', 35.00)">Add to Cart</button>
+        </article>
+
+        <article class="book-info">
+            <div class="book-cover" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%); display: flex; align-items: center; justify-content: center; color: #333; font-size: 40px;">
+                <i class="fa-solid fa-clock"></i>
+            </div>
+            <h3>History Unveiled</h3>
+            <p>by Historian Mike</p>
+            <p class="price">RM 45.00</p>
+            <button onclick="addToCart('History Unveiled', 45.00)">Add to Cart</button>
+        </article>
+
+    </div>
+</section>
+
+<!-- NEW ARRIVALS -->
+<section class="new-arrivals">
+    <h2>New Arrivals</h2>
+
+    <div class="book-list">
+
+        <article class="book-item">
+            <div class="book-cover" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); display: flex; align-items: center; justify-content: center; color: white; font-size: 50px; margin-bottom: 10px;">
+                <i class="fa-solid fa-star"></i>
+            </div>
+            <h3>Journey to the Stars</h3>
+            <p class="price">RM 50.00</p>
+            <button onclick="addToCart('Journey to the Stars', 50.00)">Add to Cart</button>
+        </article>
+
+        <article class="book-item">
+            <div class="book-cover" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); display: flex; align-items: center; justify-content: center; color: white; font-size: 50px; margin-bottom: 10px;">
+                <i class="fa-solid fa-heart"></i>
+            </div>
+            <h3>The Art of Mindfulness</h3>
+            <p class="price">RM 48.00</p>
+            <button onclick="addToCart('The Art of Mindfulness', 48.00)">Add to Cart</button>
+        </article>
+
+        <article class="book-item">
+            <div class="book-cover" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); display: flex; align-items: center; justify-content: center; color: white; font-size: 50px; margin-bottom: 10px;">
+                <i class="fa-solid fa-dragon"></i>
+            </div>
+            <h3>Fantasy Realms</h3>
+            <p class="price">RM 55.00</p>
+            <button onclick="addToCart('Fantasy Realms', 55.00)">Add to Cart</button>
+        </article>
+
+        <article class="book-item">
+            <div class="book-cover" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); display: flex; align-items: center; justify-content: center; color: white; font-size: 50px; margin-bottom: 10px;">
+                <i class="fa-solid fa-microchip"></i>
+            </div>
+            <h3>Tech Innovations</h3>
+            <p class="price">RM 60.00</p>
+            <button onclick="addToCart('Tech Innovations', 60.00)">Add to Cart</button>
+        </article>
+
+        <article class="book-item">
+            <div class="book-cover" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%); display: flex; align-items: center; justify-content: center; color: #333; font-size: 50px; margin-bottom: 10px;">
+                <i class="fa-solid fa-palette"></i>
+            </div>
+            <h3>Digital Art Mastery</h3>
+            <p class="price">RM 52.00</p>
+            <button onclick="addToCart('Digital Art Mastery', 52.00)">Add to Cart</button>
+        </article>
+
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+    <p>&copy; 2025 BookHub Store. All rights reserved.</p>
+</footer>
+
+<script src="script.js"></script>
+
+<script>
+    const homeBooks = [
+        { title: "The Great Adventure", price: 40.00 },
+        { title: "Mystery of the Lost City", price: 38.00 },
+        { title: "Science Wonders", price: 42.00 },
+        { title: "Cooking Made Easy", price: 35.00 },
+        { title: "History Unveiled", price: 45.00 },
+        { title: "Journey to the Stars", price: 50.00 },
+        { title: "The Art of Mindfulness", price: 48.00 },
+        { title: "Fantasy Realms", price: 55.00 },
+        { title: "Tech Innovations", price: 60.00 },
+        { title: "Digital Art Mastery", price: 52.00 }
+    ];
+
+    function searchHome(event) {
+        if (event && event.key && event.key !== 'Enter') return;
+        
+        const keyword = document.getElementById('homeSearch').value.toLowerCase().trim();
+        if (!keyword) {
+            alert('Please enter a search term');
+            return;
+        }
+
+        const results = homeBooks.filter(book => book.title.toLowerCase().includes(keyword));
+        
+        if (results.length === 0) {
+            alert('No books found matching "' + keyword + '". Try searching in Categories for more options.');
+            return;
+        }
+
+        let searchResults = 'Found ' + results.length + ' book(s):\n\n';
+        results.forEach(book => {
+            searchResults += '• ' + book.title + ' (RM ' + book.price.toFixed(2) + ')\n';
+        });
+        searchResults += '\nGo to Categories page for more books?';
+        
+        if (confirm(searchResults)) {
+            window.location.href = 'categories.html?search=' + encodeURIComponent(keyword);
+        }
+    }
+
+    function addToCart(title, price) {
+        addBookToCart(title, price);
+        const cartTotal = parseFloat(localStorage.getItem('cartTotal')) || 0;
+        document.getElementById('cartTotal').innerText = cartTotal.toFixed(2);
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>BookHub Store - My Account</title>
+
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+     <link rel="stylesheet" href="styles.css">
+
+     <style>
+          /* --- ACCOUNT PAGE SPECIFIC STYLES --- */
+          .login-btn {
+               display: flex;
+               align-items: center;
+               gap: 8px;
+               font-weight: bold;
+               color: black;
+               text-decoration: none;
+          }
+
+          /* --- LAYOUT TENGAH --- */
+          .main-container {
+               max-width: 1200px;
+               margin: 40px auto;
+               display: grid;
+               grid-template-columns: 350px 1fr;
+               gap: 30px;
+               padding: 0 20px;
+          }
+
+          /* WISHLIST SECTION */
+          .wishlist-box {
+               background: white;
+               padding: 25px;
+               border-radius: 15px;
+               box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+               border-top: 5px solid #4F9EB4;
+          }
+
+          .wishlist-box h3 {
+               font-size: 18px;
+               margin-bottom: 20px;
+               display: flex;
+               justify-content: space-between;
+               align-items: center;
+          }
+
+          .wishlist-items {
+               min-height: 250px;
+               margin-bottom: 15px;
+          }
+
+          .wish-card {
+               display: flex;
+               align-items: center;
+               gap: 15px;
+               padding: 12px 0;
+               border-bottom: 1px solid #eee;
+               animation: fadeIn 0.5s ease;
+          }
+
+          .wish-card:last-child {
+               border-bottom: none;
+          }
+
+          .wish-info {
+               flex: 1;
+          }
+
+          .wish-info h4 {
+               font-size: 14px;
+               margin-bottom: 2px;
+          }
+
+          .wish-info p {
+               font-size: 13px;
+               color: #4F9EB4;
+               font-weight: bold;
+          }
+
+          .wish-btn-group {
+               display: flex;
+               gap: 8px;
+          }
+
+          .btn-action {
+               border: none;
+               padding: 6px 10px;
+               border-radius: 4px;
+               cursor: pointer;
+               font-size: 11px;
+               transition: 0.2s;
+          }
+
+          .btn-cart {
+               background: #B5EAD7;
+               color: #2d5a4a;
+               font-weight: bold;
+          }
+
+          .btn-remove {
+               background: #ffebee;
+               color: #c62828;
+          }
+
+          .btn-action:hover {
+               opacity: 0.8;
+          }
+
+          /* ACCOUNT FORM SECTION */
+          .form-box {
+               background: white;
+               padding: 35px;
+               border-radius: 15px;
+               box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+          }
+
+          .form-box h2 {
+               margin-bottom: 25px;
+               color: #4F9EB4;
+               font-size: 22px;
+               border-left: 5px solid #B5EAD7;
+               padding-left: 15px;
+          }
+
+          .input-grid {
+               display: grid;
+               grid-template-columns: 1fr 1fr;
+               gap: 20px;
+          }
+
+          .input-group {
+               margin-bottom: 20px;
+          }
+
+          .full-width {
+               grid-column: span 2;
+          }
+
+          .input-group label {
+               display: block;
+               margin-bottom: 8px;
+               font-weight: bold;
+               font-size: 13px;
+               color: #666;
+          }
+
+          .input-group input,
+          .input-group textarea {
+               width: 100%;
+               padding: 12px;
+               border-radius: 8px;
+               border: 1px solid #ddd;
+               background: #fafafa;
+               transition: 0.3s;
+               outline: none;
+          }
+
+          .input-group input:focus,
+          .input-group textarea:focus {
+               border-color: #4F9EB4;
+               background: white;
+               box-shadow: 0 0 8px rgba(79, 158, 180, 0.1);
+          }
+
+          .submit-btn {
+               background: #4F9EB4;
+               color: white;
+               border: none;
+               padding: 15px 50px;
+               border-radius: 8px;
+               cursor: pointer;
+               font-weight: bold;
+               font-size: 16px;
+               transition: 0.3s;
+               box-shadow: 0 4px 10px rgba(79, 158, 180, 0.3);
+          }
+
+          .submit-btn:hover {
+               background: #3d7d8f;
+               transform: translateY(-2px);
+          }
+
+          /* FOOTER */
+          .footer {
+               background: #B2E0D9;
+               text-align: center;
+               padding: 25px;
+               margin-top: 50px;
+               font-weight: 500;
+          }
+
+          @keyframes fadeIn {
+               from {
+                    opacity: 0;
+                    transform: translateY(10px);
+               }
+
+               to {
+                    opacity: 1;
+                    transform: translateY(0);
+               }
+          }
+
+          /* RESPONSIVE */
+          @media (max-width: 900px) {
+               .main-container {
+                    grid-template-columns: 1fr;
+               }
+
+               .input-grid {
+                    grid-template-columns: 1fr;
+               }
+
+               .full-width {
+                    grid-column: span 1;
+               }
+          }
+     </style>
+</head>
+
+<body>
+
+     <header class="header">
+          <div class="logo">
+               <a href="home.html"><img src="logo.png" alt="BookHub Logo"></a>
+          </div>
+          <div class="search-bar">
+               <input type="text" id="pageSearch" placeholder="Search for books, authors..." onkeypress="pageSearch(event)">
+               <button type="button" onclick="pageSearch()"><i class="fa-solid fa-magnifying-glass"></i> Search</button>
+          </div>
+          <div class="login-section" id="authSection">
+          </div>
+     </header>
+
+     <nav class="navbar">
+          <div class="nav-links">
+               <a href="promotions.html">Promotions</a>
+               <a href="stores.html">Store Locations</a>
+               <a href="authors.html">Authors</a>
+               <a href="categories.html">Categories</a>
+               <a href="about.html">About Us</a>
+               <a href="help.html">Help & Support</a>
+          </div>
+          <a href="payment.html" class="payment-section">
+               <i class="fa-solid fa-cart-shopping"></i>
+               <span class="amount">RM <span id="cartTotal">0.00</span></span>
+          </a>
+     </nav>
+
+     <div class="main-container">
+          <aside class="wishlist-box">
+               <h3>My Wishlist <i class="fa-solid fa-heart" style="color: #ff4d4d;"></i></h3>
+               <div id="wishlistContainer" class="wishlist-items">
+               </div>
+               <div style="border-top: 1px solid #eee; padding-top: 15px; font-weight: bold; font-size: 14px;">
+                    Total Items: <span id="wishCount" style="color: #4F9EB4;">0</span>
+               </div>
+          </aside>
+
+          <section class="form-box">
+               <h2 id="formTitle">Create Account / Login</h2>
+               <form id="accountForm">
+                    <div class="input-grid">
+                         <div class="input-group">
+                              <label>FULL NAME</label>
+                              <input type="text" id="fullName" placeholder="Full name as per IC" required>
+                         </div>
+                         <div class="input-group">
+                              <label>MOBILE NUMBER</label>
+                              <input type="text" id="mobile" placeholder="e.g. 0123456789">
+                         </div>
+                         <div class="input-group full-width">
+                              <label>EMAIL ADDRESS</label>
+                              <input type="email" id="email" placeholder="example@email.com" required>
+                         </div>
+                         <div class="input-group full-width">
+                              <label>SHIPPING ADDRESS</label>
+                              <textarea id="address" rows="4" placeholder="Full delivery address..."></textarea>
+                         </div>
+                    </div>
+                    <div style="text-align: center; margin-top: 10px;">
+                         <button type="submit" class="submit-btn" id="submitBtn">SAVE & LOGIN</button>
+                    </div>
+               </form>
+          </section>
+     </div>
+
+     <footer class="footer">
+          <p>&copy; 2025 BookHub Store. All rights reserved.</p>
+     </footer>
+
+     <script>
+          // FUNGSI UNTUK UPDATE PAPARAN BERDASARKAN STATUS LOGIN
+          function updateUI() {
+               const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+               const userName = localStorage.getItem('userName');
+               const authSection = document.getElementById('authSection');
+               const formTitle = document.getElementById('formTitle');
+               const submitBtn = document.getElementById('submitBtn');
+
+               if (isLoggedIn) {
+                    authSection.innerHTML = `
+                <div class="login-btn">
+                    <i class="fa-solid fa-circle-user"></i>
+                    <span>Hi, ${userName}</span>
+                    <button onclick="logout()" style="margin-left:10px; border:none; background:none; color:red; cursor:pointer; font-weight:bold;">[Logout]</button>
+                </div>`;
+                    formTitle.innerText = "MY PROFILE DETAILS";
+                    submitBtn.innerText = "UPDATE PROFILE";
+
+                    // Isi data lama jika ada
+                    document.getElementById('fullName').value = userName;
+                    renderWishlist();
+               } else {
+                    authSection.innerHTML = `
+                <a href="account.html" class="login-btn">
+                    <i class="fa-solid fa-user"></i>
+                    <span>Login</span>
+                </a>`;
+                    formTitle.innerText = "CREATE ACCOUNT / LOGIN";
+                    submitBtn.innerText = "SAVE & LOGIN";
+                    document.getElementById('wishlistContainer').innerHTML = `
+                <div style="text-align:center; padding-top:40px; color:#999;">
+                    <i class="fa-solid fa-lock" style="font-size:30px; margin-bottom:10px;"></i>
+                    <p>Please login to view your wishlist.</p>
+                </div>`;
+               }
+          }
+
+          // FUNGSI PAPAR WISHLIST
+          function renderWishlist() {
+               let wishlist = JSON.parse(localStorage.getItem('userWishlist')) || [];
+               const container = document.getElementById('wishlistContainer');
+
+               if (wishlist.length === 0) {
+                    container.innerHTML = "<p>Wishlist is empty.</p>";
+                    return;
+               }
+
+               container.innerHTML = wishlist.map((item, index) => `
+        <div class="wish-card">
+            <div class="wish-info">
+                <h4>${item.title}</h4>
+                <p>RM ${item.price.toFixed(2)}</p>
+            </div>
+            <div class="wish-btn-group">
+                <button class="btn-action btn-cart" onclick='addToCartFromWish(${JSON.stringify(item)})'>
+                   <i class="fa-solid fa-plus"></i> Cart
+                </button>
+                <button class="btn-action btn-remove" onclick="removeWish(${index})">
+                   <i class="fa-solid fa-trash"></i>
+                </button>
+            </div>
+        </div>
+    `).join('');
+          }
+
+          // Fungsi baru untuk simpan barang ke LocalStorage
+          function addToCartFromWish(book) {
+               // Use global addBookToCart function from script.js
+               addBookToCart(book.title, book.price);
+               
+               alert(`${book.title} ditambah ke bakul!`);
+               
+               // Navigate to payment page
+               window.location.href = 'payment.html';
+          }
+
+          // Fungsi untuk kemaskini RM di Nav Bar
+          function updateCartNav() {
+               let cart = JSON.parse(localStorage.getItem('userCart')) || [];
+               let total = cart.reduce((sum, item) => sum + item.price, 0);
+
+               // Pastikan ID 'cartTotalDisplay' atau 'cartTotal' sama dengan HTML anda
+               const display = document.getElementById('cartTotalDisplay') || document.getElementById('cartTotal');
+               if (display) display.innerText = total.toFixed(2);
+          }
+
+          // Panggil updateCartNav bila page load
+          window.addEventListener('load', updateCartNav);
+
+          function removeWish(index) {
+               let wishlist = JSON.parse(localStorage.getItem('userWishlist')) || [];
+               wishlist.splice(index, 1);
+               localStorage.setItem('userWishlist', JSON.stringify(wishlist));
+               renderWishlist();
+          }
+
+          // FUNGSI LOGIN / SUBMIT
+          document.getElementById('accountForm').addEventListener('submit', function (e) {
+               e.preventDefault();
+               const name = document.getElementById('fullName').value;
+               const email = document.getElementById('email').value;
+
+               localStorage.setItem('isLoggedIn', 'true');
+               localStorage.setItem('userName', name);
+               localStorage.setItem('userEmail', email);
+
+               alert("Profile Saved & Logged In!");
+               location.reload();
+          });
+
+          function logout() {
+               if (confirm("Are you sure to logout?")) {
+                    localStorage.removeItem('isLoggedIn');
+                    localStorage.removeItem('userName');
+                    location.reload();
+               }
+          }
+
+          // LOAD PAGE
+          window.onload = updateUI;
+
+          function pageSearch(event) {
+               if (event && event.key && event.key !== 'Enter') return;
+               alert('Go to Categories page to search for books.');
+               window.location.href = 'categories.html';
+          }
+     </script>
+
+<script src="script.js"></script>
+
+</body>
+
+</html>

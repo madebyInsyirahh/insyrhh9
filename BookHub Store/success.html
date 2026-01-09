@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Success - BookHub</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <style>
+        .success-card { background: white; padding: 40px; border-radius: 10px; text-align: center; box-shadow: 0 4px 20px rgba(0,0,0,0.1); max-width: 400px; width: 90%; margin: 40px auto; }
+        .icon { font-size: 60px; color: #4CAF50; margin-bottom: 20px; }
+        h1 { margin-bottom: 10px; color: #333; }
+        p { color: #666; margin-bottom: 20px; }
+        .btn { display: block; width: 100%; padding: 12px; margin: 10px 0; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; text-decoration: none; }
+        .btn-pdf { background: #2D3E50; color: white; }
+        .btn-home { background: #4F9EB4; color: white; }
+    </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+    <div class="logo">
+        <a href="home.html">
+            <img src="logo.png" alt="BookHub Logo">
+        </a>
+    </div>
+
+    <div class="search-bar">
+        <input type="text" id="pageSearch" placeholder="Search for books, authors, categories" onkeypress="pageSearch(event)">
+        <button type="button" onclick="pageSearch()">Search</button>
+    </div>
+
+    <div class="login-section" id="authSection"></div>
+</header>
+
+<!-- NAVIGATION -->
+<nav class="navbar">
+    <div class="nav-links">
+        <a href="promotions.html">Promotions</a>
+        <a href="stores.html">Store Locations</a>
+        <a href="authors.html">Authors</a>
+        <a href="categories.html">Categories</a>
+        <a href="about.html">About Us</a>
+        <a href="help.html">Help & Support</a>
+    </div>
+
+    <a href="payment.html" class="payment-section">
+        <i class="fa-solid fa-cart-shopping"></i>
+        RM <span id="cartTotal">0.00</span>
+    </a>
+</nav>
+
+<div class="success-card">
+    <div class="icon"><i class="fa-solid fa-circle-check"></i></div>
+    <h1>Payment Success!</h1>
+    <p>Hi <span id="displayName">Customer</span>, your payment of RM 45.00 has been received.</p>
+    
+    <button onclick="downloadInvoice()" class="btn btn-pdf"><i class="fa-solid fa-file-pdf"></i> Download Invoice</button>
+    <a href="index.html" class="btn btn-home">Back to Shop</a>
+</div>
+
+<script>
+    document.getElementById('displayName').innerText = localStorage.getItem('buyerName') || 'Customer';
+
+    function downloadInvoice() {
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF();
+        const name = localStorage.getItem('buyerName') || 'Customer';
+
+        doc.setFontSize(20);
+        doc.text("OFFICIAL INVOICE - BOOKHUB", 20, 20);
+        doc.setFontSize(12);
+        doc.text("Customer Name: " + name, 20, 40);
+        doc.text("Order ID: #BH-" + Math.floor(Math.random() * 100000), 20, 50);
+        doc.text("Date: " + new Date().toLocaleDateString(), 20, 60);
+        doc.line(20, 70, 190, 70);
+        doc.text("Item: Buku Sejarah Dunia (1 unit)", 20, 80);
+        doc.text("Total: RM 45.00", 20, 90);
+        doc.text("Status: PAID", 20, 100);
+        doc.text("Thank you for your purchase!", 20, 120);
+
+        doc.save("Invoice_BookHub.pdf");
+    }
+
+    function pageSearch(event) {
+        if (event && event.key && event.key !== 'Enter') return;
+        alert('Go to Categories page to search for books.');
+        window.location.href = 'categories.html';
+    }
+</script>
+
+<footer class="footer">
+    <p>&copy; 2025 BookHub Store. All rights reserved.</p>
+</footer>
+
+<script src="script.js"></script>
+
+</body>
+</html>

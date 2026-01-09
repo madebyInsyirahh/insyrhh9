@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BookHub Store - Checkout</title>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Shared CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- LOADING OVERLAY -->
+<div id="loadingOverlay">
+    <div class="spinner"></div>
+    <p>Connecting to Secure Bank Gateway...</p>
+</div>
+
+<!-- HEADER -->
+<header class="header">
+    <div class="logo">
+        <a href="home.html">
+            <img src="logo.png" alt="BookHub Logo">
+        </a>
+    </div>
+
+    <div class="search-bar">
+        <input type="text" id="pageSearch" placeholder="Search for books, authors, categories" onkeypress="pageSearch(event)">
+        <button type="button" onclick="pageSearch()">Search</button>
+    </div>
+
+    <div class="login-section" id="authSection"></div>
+</header>
+
+<!-- NAVIGATION -->
+<nav class="navbar">
+    <div class="nav-links">
+        <a href="promotions.html">Promotions</a>
+        <a href="stores.html">Store Locations</a>
+        <a href="authors.html">Authors</a>
+        <a href="categories.html">Categories</a>
+        <a href="about.html">About Us</a>
+        <a href="help.html">Help & Support</a>
+    </div>
+
+    <div class="payment-section">
+        <i class="fa-solid fa-cart-shopping"></i>
+        RM <span id="cartTotal">0.00</span>
+    </div>
+</nav>
+
+<!-- PAYMENT CONTENT -->
+<main class="payment-container">
+<form id="orderForm">
+
+    <!-- DELIVERY ADDRESS -->
+    <div class="section-label">DELIVERY ADDRESS</div>
+    <div class="card-blue">
+        <div class="input-row">
+            <label>NAME:</label>
+            <input type="text" id="custName" required>
+        </div>
+        <div class="input-row">
+            <label>PHONE:</label>
+            <input type="tel" required>
+        </div>
+        <div class="input-row">
+            <label>ADDRESS:</label>
+            <textarea required></textarea>
+        </div>
+    </div>
+
+    <!-- ORDER SUMMARY -->
+    <div class="section-label">ORDER SUMMARY</div>
+    <div class="card-blue">
+        <div id="cartItemsList"></div>
+
+        <hr class="divider">
+
+        <div class="price-summary">
+            <div class="price-row">
+                <span>Subtotal</span>
+                <span id="subtotal">RM 0.00</span>
+            </div>
+            <div class="price-row">
+                <span>SST (6%)</span>
+                <span id="sst">RM 0.00</span>
+            </div>
+            <div class="price-row total">
+                <span>TOTAL</span>
+                <span id="totalDisplay">RM 0.00</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- PAYMENT METHOD -->
+    <div class="section-label">PAYMENT METHOD</div>
+    <div class="payment-box">
+
+        <div class="acc-item">
+            <label class="acc-trigger">
+                <span>
+                    <input type="radio" name="pay_group" value="Card" onclick="toggleAcc('acc1')">
+                    Credit / Debit Card
+                </span>
+                <i class="fa-solid fa-credit-card"></i>
+            </label>
+            <div id="acc1" class="acc-content">
+                <input type="text" class="full-input" placeholder="Card Number">
+            </div>
+        </div>
+
+        <div class="acc-item">
+            <label class="acc-trigger">
+                <span>
+                    <input type="radio" name="pay_group" value="Banking" onclick="toggleAcc('acc2')">
+                    Online Banking (FPX)
+                </span>
+                <i class="fa-solid fa-building-columns"></i>
+            </label>
+            <div id="acc2" class="acc-content">
+                <label><input type="radio" name="bank"> Maybank</label><br>
+                <label><input type="radio" name="bank"> BSN</label>
+            </div>
+        </div>
+
+    </div>
+
+    <button type="submit" class="pay-btn">PAY NOW</button>
+    <div class="security-footer-text">
+        <i class="fa-solid fa-lock"></i> SSL Encrypted & Secure Payment
+    </div>
+
+</form>
+</main>
+
+<footer class="footer">
+    <p>&copy; 2025 BookHub Store. All rights reserved.</p>
+</footer>
+
+<script src="script.js"></script>
+
+<script>
+    // Display cart items
+    function displayCartItems() {
+        const items = getCartItems();
+        const container = document.getElementById('cartItemsList');
+        
+        if (!items || items.length === 0) {
+            container.innerHTML = '<p style="text-align:center; color:#999;">Your cart is empty</p>';
+            return;
+        }
+        
+        let html = '';
+        items.forEach((item, index) => {
+            html += `
+                <div class="item-row" style="display: flex; justify-content: space-between; align-items: center; padding: 10px 0;">
+                    <div style="flex: 1;">
+                        <p><strong>${item.title}</strong></p>
+                        <p style="font-size: 14px; color: #666;">RM ${item.price.toFixed(2)} x ${item.qty}</p>
+                    </div>
+                    <div style="text-align: right; margin-right: 15px;">
+                        <p style="font-weight: bold;">RM ${(item.price * item.qty).toFixed(2)}</p>
+                    </div>
+                    <button type="button" onclick="removeItem('${item.title}')" style="background: #ff6b6b; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer; font-size: 12px;">
+                        <i class="fa-solid fa-trash"></i> Remove
+                    </button>
+                </div>
+                <hr style="margin: 5px 0;">
+            `;
+        });
+        
+        container.innerHTML = html;
+        updateOrderSummary();
+    }
+    
+    function removeItem(title) {
+        removeFromCart(title);
+        displayCartItems();
+    }
+    
+    function updateOrderSummary() {
+        const items = getCartItems();
+        const subtotal = items.reduce((sum, item) => sum + (item.price * item.qty), 0);
+        const sst = subtotal * 0.06;
+        const total = subtotal + sst;
+        
+        document.getElementById('subtotal').textContent = `RM ${subtotal.toFixed(2)}`;
+        document.getElementById('sst').textContent = `RM ${sst.toFixed(2)}`;
+        document.getElementById('totalDisplay').textContent = `RM ${total.toFixed(2)}`;
+        
+        localStorage.setItem('finalTotal', total.toFixed(2));
+    }
+    
+    // Load on page load
+    document.addEventListener('DOMContentLoaded', () => {
+        displayCartItems();
+    });
+
+    function pageSearch(event) {
+        if (event && event.key && event.key !== 'Enter') return;
+        alert('Go to Categories page to search for books.');
+        window.location.href = 'categories.html';
+    }
+</script>
+
+</body>
+</html>

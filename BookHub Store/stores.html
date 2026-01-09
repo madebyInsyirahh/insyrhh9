@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BookHub Store - Store Locations</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+
+    <style>
+        /* --- STORE LOCATIONS PAGE SPECIFIC STYLES --- */
+        
+        .footer {
+            background: #B2E0D9;
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+            font-weight: bold;
+        }
+
+        /* --- CSS KHUSUS UNTUK STORE LOCATIONS --- */
+        .store-container {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .page-title {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 28px;
+            color: #2D3E50;
+            font-weight: bold;
+        }
+
+        .store-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .store-card {
+            background: #AED8FF;
+            border-radius: 12px;
+            padding: 25px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid #90caf9;
+        }
+
+        .store-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .store-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #4F9EB4;
+            padding-bottom: 10px;
+        }
+
+        .store-header i {
+            font-size: 24px;
+            color: #2D3E50;
+        }
+
+        .store-header h3 {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .store-details {
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .store-details p {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .store-details i {
+            color: #4F9EB4;
+            margin-top: 4px;
+            width: 15px;
+            text-align: center;
+        }
+
+        /* SECTION PETA */
+        .map-section {
+            background: #fff;
+            padding: 25px;
+            border-radius: 12px;
+            border: 1px solid #ccc;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .map-section h2 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: bold;
+        }
+
+        .map-container {
+            position: relative;
+            width: 100%;
+            height: 450px;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid #ddd;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                text-align: center;
+                gap: 15px;
+            }
+
+            .search-bar input {
+                width: 100%;
+            }
+
+            .navbar {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+            }
+
+            .payment-section {
+                margin-left: 0;
+                width: 100%;
+                justify-content: center;
+            }
+
+            .map-container {
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="header">
+        <div class="logo">
+            <a href="home.html">
+                <img src="logo.png" alt="BookHub Logo">
+            </a>
+        </div>
+        <div class="search-bar">
+            <input type="text" id="pageSearch" placeholder="Find a store near you..." onkeypress="pageSearch(event)">
+            <button type="button" onclick="pageSearch()">Search</button>
+        </div>
+        <div class="login-section" id="authSection"></div>
+    </header>
+
+    <nav class="navbar">
+        <div class="nav-links">
+            <a href="promotions.html">Promotions</a>
+            <a href="stores.html" style="color: #4F9EB4; border-bottom: 2px solid #4F9EB4;">Store Locations</a>
+            <a href="authors.html">Authors</a>
+            <a href="categories.html">Categories</a>
+            <a href="about.html">About Us</a>
+            <a href="help.html">Help & Support</a>
+        </div>
+        <a href="payment.html" class="payment-section">
+            <i class="fa-solid fa-cart-shopping"></i>
+            RM <span id="cartTotal">0.00</span>
+        </a>
+    </nav>
+
+    <main class="store-container">
+        <h1 class="page-title"><i class="fa-solid fa-map-location-dot"></i> Our Store Locations</h1>
+
+        <div class="store-grid">
+            <div class="store-card">
+                <div class="store-header">
+                    <i class="fa-solid fa-shop"></i>
+                    <h3>BookHub Kuala Lumpur</h3>
+                </div>
+                <div class="store-details">
+                    <p><i class="fa-solid fa-location-dot"></i> Lot 123, Level 2, Suria KLCC, City Centre, 50088 Kuala
+                        Lumpur.</p>
+                    <p><i class="fa-solid fa-clock"></i> 10:00 AM - 10:00 PM (Daily)</p>
+                    <p><i class="fa-solid fa-phone"></i> +603-2166 1234</p>
+                </div>
+            </div>
+
+            <div class="store-card">
+                <div class="store-header">
+                    <i class="fa-solid fa-shop"></i>
+                    <h3>BookHub Shah Alam</h3>
+                </div>
+                <div class="store-details">
+                    <p><i class="fa-solid fa-location-dot"></i> No. 45, Ground Floor, Central i-City, 40000 Shah Alam,
+                        Selangor.</p>
+                    <p><i class="fa-solid fa-clock"></i> 10:00 AM - 10:00 PM (Daily)</p>
+                    <p><i class="fa-solid fa-phone"></i> +603-5523 5678</p>
+                </div>
+            </div>
+
+            <div class="store-card">
+                <div class="store-header">
+                    <i class="fa-solid fa-shop"></i>
+                    <h3>BookHub Johor Bahru</h3>
+                </div>
+                <div class="store-details">
+                    <p><i class="fa-solid fa-location-dot"></i> G-02, Paradigm Mall JB, Jalan Skudai, 81200 Johor Bahru.
+                    </p>
+                    <p><i class="fa-solid fa-clock"></i> 10:00 AM - 10:00 PM (Daily)</p>
+                    <p><i class="fa-solid fa-phone"></i> +607-244 8899</p>
+                </div>
+            </div>
+        </div>
+
+        <section class="map-section">
+            <h2><i class="fa-solid fa-magnifying-glass-location"></i> View Location on Map</h2>
+            <div class="map-container">
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3983.7915354972175!2d101.71007807497123!3d3.157833253457173!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31cc37d12d66944f%3A0xe9fabde9ad386c7!2sSuria%20KLCC!5e0!3m2!1sen!2smy!4v1710000000000!5m2!1sen!2smy"
+                    width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 BookHub Store. All rights reserved.</p>
+    </footer>
+<script src="script.js"></script>
+<script>
+    function pageSearch(event) {
+        if (event && event.key && event.key !== 'Enter') return;
+        alert('Go to Categories page to search for books.');
+        window.location.href = 'categories.html';
+    }
+</script>
+</body>
+</html>

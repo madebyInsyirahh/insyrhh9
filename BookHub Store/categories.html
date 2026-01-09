@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BookHub Store - Categories</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    
+    <style>
+
+        .category-banner { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 50px 20px; text-align: center; margin-bottom: 30px; border-radius: 12px; }
+        .category-banner h1 { font-size: 42px; margin-bottom: 10px; }
+        .category-banner p { font-size: 18px; opacity: 0.95; }
+
+        .main-container { max-width: 1200px; margin: 30px auto; display: grid; grid-template-columns: 250px 1fr; gap: 30px; padding: 0 20px; }
+        .sidebar { background: #AED8FF; padding: 20px; border-radius: 12px; height: fit-content; }
+        .sidebar h3 { font-size: 16px; margin-bottom: 15px; border-bottom: 2px solid #4F9EB4; padding-bottom: 5px; }
+        .filter-group { margin-bottom: 20px; }
+        .filter-group label { display: block; margin-bottom: 10px; font-size: 14px; cursor: pointer; }
+
+        .content-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        .book-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 20px; }
+        
+        .book-item {
+            background: #AED8FF;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            transition: 0.3s;
+        }
+        .book-item:hover { transform: scale(1.03); }
+        .book-placeholder { width: 100%; height: 230px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 6px; display: flex; align-items: center; justify-content: center; margin-bottom: 10px; font-weight: bold; color: white; font-size: 50px; flex-direction: column; gap: 10px; }
+        .book-placeholder.horror { background: linear-gradient(135deg, #d32f2f 0%, #b71c1c 100%); }
+        .book-placeholder.romance { background: linear-gradient(135deg, #ec407a 0%, #c2185b 100%); }
+        .book-placeholder.fiction { background: linear-gradient(135deg, #1565c0 0%, #0d47a1 100%); }
+        
+        .book-item h4 { font-size: 15px; margin-bottom: 5px; }
+        .book-item .price { font-weight: bold; color: #333; margin-bottom: 10px; }
+        
+        /* --- CSS BUTTON GROUP & LOVE FUNCTION --- */
+        .button-group { display: flex; gap: 5px; justify-content: center; }
+        .book-item .btn-cart { background: #4F9EB4; color: white; border: none; padding: 8px 10px; border-radius: 6px; cursor: pointer; font-weight: bold; flex: 1; }
+        
+        .book-item .btn-wish { 
+            background: white; 
+            color: #ccc; /* Warna asal kelabu */
+            border: 1px solid #ddd; 
+            padding: 8px 10px; 
+            border-radius: 6px; 
+            cursor: pointer; 
+            transition: all 0.3s ease;
+        }
+
+        /* Class bila butang like aktif (Merah) */
+        .book-item .btn-wish.active { 
+            color: #ff4d4d; 
+            border-color: #ff4d4d;
+            background: #fff0f0;
+        }
+
+      
+.login-btn a:hover span {
+    color: #4F9EB4;
+    text-decoration: underline;
+}
+
+        .footer { background: #B2E0D9; text-align: center; padding: 20px; margin-top: 40px; }
+    </style>
+</head>
+<body>
+
+<header class="header">
+    <div class="logo"><a href="home.html"><img src="logo.png" alt="BookHub Logo"></a></div>
+    <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="Search for books..." onkeyup="filterBooks()">
+        <button type="button" onclick="filterBooks()">Search</button>
+    </div>
+    <div class="login-section" id="authSection">
+        </div>
+</header>
+
+<nav class="navbar">
+    <div class="nav-links">
+        <a href="promotions.html">Promotions</a>
+        <a href="stores.html">Store Locations</a>
+        <a href="authors.html">Authors</a>
+        <a href="categories.html" style="color: #4F9EB4;">Categories</a>
+        <a href="about.html">About Us</a>
+        <a href="help.html">Help & Support</a>
+    </div>
+    <a href="payment.html" class="payment-section">
+        <i class="fa-solid fa-cart-shopping"></i>
+        RM <span id="cartTotal">0.00</span>
+    </a>
+</nav>
+
+<div class="main-container">
+    <aside class="sidebar">
+        <h3>Categories</h3>
+        <div class="filter-group">
+            <label><input type="checkbox" class="cat-filter" value="Fiction" onchange="filterBooks()" checked> Fiction</label>
+            <label><input type="checkbox" class="cat-filter" value="Horror" onchange="filterBooks()" checked> Horror</label>
+            <label><input type="checkbox" class="cat-filter" value="Romance" onchange="filterBooks()" checked> Romance</label>
+            <label><input type="checkbox" class="cat-filter" value="Fantasy" onchange="filterBooks()" checked> Fantasy</label>
+            <label><input type="checkbox" class="cat-filter" value="Science Fiction" onchange="filterBooks()" checked> Science Fiction</label>
+            <label><input type="checkbox" class="cat-filter" value="Mystery" onchange="filterBooks()" checked> Mystery</label>
+            <label><input type="checkbox" class="cat-filter" value="Self-Help" onchange="filterBooks()" checked> Self-Help</label>
+            <label><input type="checkbox" class="cat-filter" value="History" onchange="filterBooks()" checked> History</label>
+            <label><input type="checkbox" class="cat-filter" value="Business" onchange="filterBooks()" checked> Business</label>
+            <label><input type="checkbox" class="cat-filter" value="Technology" onchange="filterBooks()" checked> Technology</label>
+        </div>
+        
+        <h3>Sort By Price</h3>
+        <select id="sortPrice" onchange="filterBooks()" style="width: 100%; padding: 8px; border-radius: 6px;">
+            <option value="none">Default</option>
+            <option value="low">Low to High</option>
+            <option value="high">High to Low</option>
+        </select>
+    </aside>
+
+    <section>
+        <div class="content-header">
+            <h2 id="viewTitle">Category: All</h2>
+            <span id="bookCount" style="font-weight: bold;"></span>
+        </div>
+        <div class="book-list" id="bookGrid"></div>
+    </section>
+</div>
+
+<footer class="footer"><p>© 2025 BookHub Store. All rights reserved.</p></footer>
+
+<script>
+    const allBooks = [
+        // FICTION
+        { id: 1, title: "The Great Adventure", category: "Fiction", price: 40.00 },
+        { id: 2, title: "Echoes of Tomorrow", category: "Fiction", price: 38.00 },
+        { id: 3, title: "The Silent River", category: "Fiction", price: 42.00 },
+        { id: 4, title: "Whispers in the Dark", category: "Fiction", price: 35.00 },
+        { id: 5, title: "The Last Chapter", category: "Fiction", price: 45.00 },
+
+        // HORROR
+        { id: 6, title: "The Ghost", category: "Horror", price: 25.00 },
+        { id: 7, title: "Dark Night", category: "Horror", price: 15.00 },
+        { id: 8, title: "The Haunting Hour", category: "Horror", price: 28.00 },
+        { id: 9, title: "Shadows of Fear", category: "Horror", price: 32.00 },
+        { id: 10, title: "The Curse", category: "Horror", price: 38.00 },
+
+        // ROMANCE
+        { id: 11, title: "Love Story", category: "Romance", price: 45.00 },
+        { id: 12, title: "Sweet Rose", category: "Romance", price: 55.00 },
+        { id: 13, title: "Forever Hearts", category: "Romance", price: 48.00 },
+        { id: 14, title: "Passion's Promise", category: "Romance", price: 52.00 },
+        { id: 15, title: "Moonlight Dreams", category: "Romance", price: 42.00 },
+
+        // FANTASY
+        { id: 16, title: "Dragon's Realm", category: "Fantasy", price: 50.00 },
+        { id: 17, title: "The Enchanted Forest", category: "Fantasy", price: 48.00 },
+        { id: 18, title: "Magic and Destiny", category: "Fantasy", price: 55.00 },
+        { id: 19, title: "Quest for the Crown", category: "Fantasy", price: 60.00 },
+        { id: 20, title: "Wizard's Academy", category: "Fantasy", price: 52.00 },
+
+        // SCIENCE FICTION
+        { id: 21, title: "Future World", category: "Science Fiction", price: 35.00 },
+        { id: 22, title: "Space War", category: "Science Fiction", price: 60.00 },
+        { id: 23, title: "Cyber Nexus", category: "Science Fiction", price: 58.00 },
+        { id: 24, title: "The Time Paradox", category: "Science Fiction", price: 52.00 },
+        { id: 25, title: "Mars Colony", category: "Science Fiction", price: 62.00 },
+
+        // MYSTERY
+        { id: 26, title: "Murder at Midnight", category: "Mystery", price: 44.00 },
+        { id: 27, title: "The Hidden Secret", category: "Mystery", price: 40.00 },
+        { id: 28, title: "Deadly Deception", category: "Mystery", price: 46.00 },
+        { id: 29, title: "The Last Clue", category: "Mystery", price: 42.00 },
+        { id: 30, title: "Unsolved Case", category: "Mystery", price: 48.00 },
+
+        // SELF-HELP
+        { id: 31, title: "Mind Power", category: "Self-Help", price: 38.00 },
+        { id: 32, title: "Success Secrets", category: "Self-Help", price: 42.00 },
+        { id: 33, title: "Find Your Purpose", category: "Self-Help", price: 40.00 },
+        { id: 34, title: "The Happiness Guide", category: "Self-Help", price: 35.00 },
+        { id: 35, title: "Confidence Builder", category: "Self-Help", price: 39.00 },
+
+        // HISTORY
+        { id: 36, title: "History Unveiled", category: "History", price: 45.00 },
+        { id: 37, title: "The Ancient Civilizations", category: "History", price: 52.00 },
+        { id: 38, title: "World War Stories", category: "History", price: 48.00 },
+        { id: 39, title: "Kings and Kingdoms", category: "History", price: 50.00 },
+        { id: 40, title: "Revolution and Change", category: "History", price: 46.00 },
+
+        // BUSINESS
+        { id: 41, title: "Start Your Business", category: "Business", price: 55.00 },
+        { id: 42, title: "Marketing Master", category: "Business", price: 58.00 },
+        { id: 43, title: "Leadership Guide", category: "Business", price: 52.00 },
+        { id: 44, title: "Money Matters", category: "Business", price: 48.00 },
+        { id: 45, title: "Corporate Strategy", category: "Business", price: 60.00 },
+
+        // TECHNOLOGY
+        { id: 46, title: "Web Development 101", category: "Technology", price: 65.00 },
+        { id: 47, title: "Python Programming", category: "Technology", price: 72.00 },
+        { id: 48, title: "AI and Machine Learning", category: "Technology", price: 85.00 },
+        { id: 49, title: "Cloud Computing Guide", category: "Technology", price: 70.00 },
+        { id: 50, title: "Cybersecurity Essentials", category: "Technology", price: 68.00 }
+    ];
+
+    let cartSum = parseFloat(localStorage.getItem('cartTotal')) || 0;
+
+    // 1. UPDATE HEADER (LOGIN STATUS)
+function updateHeader() {
+    const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+    const userName = localStorage.getItem('userName');
+    const authSection = document.getElementById('authSection');
+
+    if (isLoggedIn) {
+        // Tambahkan tag <a href="account.html"> di sekeliling nama user
+        authSection.innerHTML = `
+            <div class="login-btn">
+                <i class="fa-solid fa-circle-user"></i>
+                <a href="account.html" style="text-decoration:none; color:black;">
+                    <span>Hi, ${userName}</span>
+                </a>
+                <button onclick="logout()" style="margin-left:10px; cursor:pointer; border:none; background:none; color:red; font-weight:bold;">[Logout]</button>
+            </div>`;
+    } else {
+        authSection.innerHTML = `<a href="account.html" class="login-btn"><i class="fa-solid fa-user"></i> <span>Login</span></a>`;
+    }
+}
+
+    function logout() {
+        localStorage.removeItem('isLoggedIn');
+        localStorage.removeItem('userName');
+        location.reload();
+    }
+
+    // 2. CHECK ACCESS
+    function checkAccess() {
+        if (localStorage.getItem('isLoggedIn') === 'true') return true;
+        alert("Sila LOGIN terlebih dahulu!");
+        window.location.href = "account.html";
+        return false;
+    }
+
+    // 3. HANDLE WISHLIST (TOGGLE MERAH/KELABU)
+    function handleWishlist(btn, book) {
+        if (!checkAccess()) return;
+
+        let wishlist = JSON.parse(localStorage.getItem('userWishlist')) || [];
+        const index = wishlist.findIndex(item => item.id === book.id);
+
+        if (index === -1) {
+            // Add to wishlist
+            wishlist.push(book);
+            btn.classList.add('active');
+            alert("Added to Wishlist!");
+        } else {
+            // Remove from wishlist
+            wishlist.splice(index, 1);
+            btn.classList.remove('active');
+            alert("Removed from Wishlist!");
+        }
+
+        localStorage.setItem('userWishlist', JSON.stringify(wishlist));
+    }
+
+    // 4. DISPLAY BOOKS
+    function displayBooks(books) {
+        const grid = document.getElementById('bookGrid');
+        const countText = document.getElementById('bookCount');
+        grid.innerHTML = "";
+        countText.innerText = `${books.length} items found`;
+
+        let wishlist = JSON.parse(localStorage.getItem('userWishlist')) || [];
+
+        books.forEach(book => {
+            const isLiked = wishlist.some(item => item.id === book.id);
+            const activeClass = isLiked ? 'active' : '';
+            let categoryIcon = '';
+            let placeholderClass = '';
+            if (book.category === 'Horror') {
+                categoryIcon = '<i class="fa-solid fa-ghost"></i>';
+                placeholderClass = 'horror';
+            } else if (book.category === 'Romance') {
+                categoryIcon = '<i class="fa-solid fa-heart"></i>';
+                placeholderClass = 'romance';
+            } else {
+                categoryIcon = '<i class="fa-solid fa-book"></i>';
+                placeholderClass = 'fiction';
+            }
+
+            grid.innerHTML += `
+                <div class="book-item">
+                    <div class="book-placeholder ${placeholderClass}">${categoryIcon}</div>
+                    <h4>${book.title}</h4>
+                    <p class="price">RM ${book.price.toFixed(2)}</p>
+                    <div class="button-group">
+                        <button class="btn-cart" onclick="addToCart('${book.title}', ${book.price})">ADD TO CART</button>
+                        <button class="btn-wish ${activeClass}" onclick='handleWishlist(this, ${JSON.stringify(book)})'>
+                            <i class="fa-solid fa-heart"></i>
+                        </button>
+                    </div>
+                </div>
+            `;
+        });
+    }
+
+    function addToCart(title, price) {
+        if (!checkAccess()) return;
+        addBookToCart(title, price);
+        cartSum = parseFloat(localStorage.getItem('cartTotal')) || 0;
+        document.getElementById('cartTotal').innerText = cartSum.toFixed(2);
+    }
+
+    function filterBooks() {
+        const searchText = document.getElementById('searchInput').value.toLowerCase();
+        const sortValue = document.getElementById('sortPrice').value;
+        const checkedCategories = Array.from(document.querySelectorAll('.cat-filter:checked')).map(cb => cb.value);
+
+        let filtered = allBooks.filter(book => {
+            const matchCat = checkedCategories.includes(book.category);
+            const matchSearch = book.title.toLowerCase().includes(searchText);
+            return matchCat && matchSearch;
+        });
+
+        if (sortValue === "low") filtered.sort((a, b) => a.price - b.price);
+        if (sortValue === "high") filtered.sort((a, b) => b.price - a.price);
+
+        displayBooks(filtered);
+    }
+
+    window.onload = () => {
+        updateHeader();
+        
+        // Check for search parameter from global search
+        const urlParams = new URLSearchParams(window.location.search);
+        const searchQuery = urlParams.get('search');
+        if (searchQuery) {
+            document.getElementById('searchInput').value = searchQuery;
+        }
+        
+        filterBooks();
+    };
+</script>
+
+<script src="script.js"></script>
+</body>
+</html>

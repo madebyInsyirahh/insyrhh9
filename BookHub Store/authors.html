@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BookHub Store - Authors</title>
+
+    <!-- Icons -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- MAIN SHARED CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+<!-- ================= HEADER ================= -->
+<header class="header">
+    <div class="logo">
+        <a href="home.html">
+            <img src="logo.png" alt="BookHub Logo">
+        </a>
+    </div>
+
+    <div class="search-bar">
+        <input type="text" id="authorSearch" placeholder="Search for authors...">
+        <button type="button" onclick="filterAuthors()">Search</button>
+    </div>
+
+    <div class="login-section" id="authSection"></div>
+</header>
+
+<!-- ================= NAVIGATION ================= -->
+<nav class="navbar">
+    <div class="nav-links">
+        <a href="promotions.html">Promotions</a>
+        <a href="stores.html">Store Locations</a>
+        <a href="authors.html" class="active">Authors</a>
+        <a href="categories.html">Categories</a>
+        <a href="about.html">About Us</a>
+        <a href="help.html">Help & Support</a>
+    </div>
+
+    <!-- CART (LINKED TO PAYMENT PAGE) -->
+    <a href="payment.html" class="payment-section">
+        <i class="fa-solid fa-cart-shopping"></i>
+        <span class="amount">RM <span id="cartTotal">0.00</span></span>
+    </a>
+</nav>
+
+<!-- ================= AUTHORS CONTENT ================= -->
+<section class="featured-book">
+    <h2>Featured Authors</h2>
+
+    <div class="book-details" id="authorList">
+
+        <!-- AUTHOR 1 -->
+        <div class="book-info author-card" data-name="Margaret Atwood">
+            <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Margaret"
+                 alt="Margaret Atwood">
+            <h3>Margaret Atwood</h3>
+            <p><strong>Genre:</strong> Speculative Fiction</p>
+            <p>
+                A renowned Canadian author known for powerful storytelling
+                that explores identity, gender, and social issues.
+            </p>
+            <button type="button" onclick="showAuthorBooks('Margaret Atwood')">View Books</button>
+        </div>
+
+        <!-- AUTHOR 2 -->
+        <div class="book-info author-card" data-name="Haruki Murakami">
+            <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Murakami"
+                 alt="Haruki Murakami">
+            <h3>Haruki Murakami</h3>
+            <p><strong>Genre:</strong> Magical Realism</p>
+            <p>
+                Famous for blending surreal elements with deep emotional
+                storytelling.
+            </p>
+            <button type="button" onclick="showAuthorBooks('Haruki Murakami')">View Books</button>
+        </div>
+
+        <!-- AUTHOR 3 -->
+        <div class="book-info author-card" data-name="Jane Austen">
+            <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Austen"
+                 alt="Jane Austen">
+            <h3>Jane Austen</h3>
+            <p><strong>Genre:</strong> Classic Romance</p>
+            <p>
+                A timeless writer whose novels explore love, society,
+                and human behavior.
+            </p>
+            <button type="button" onclick="showAuthorBooks('Jane Austen')">View Books</button>
+        </div>
+
+    </div>
+</section>
+
+<!-- ================= BOOKS MODAL ================= -->
+<div id="booksModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeBooks()">&times;</span>
+        <h2 id="authorName">Author Books</h2>
+        <div id="booksList" class="books-grid"></div>
+    </div>
+</div>
+
+<!-- ================= FOOTER ================= -->
+<footer class="footer">
+    <p>&copy; 2025 BookHub Store. All rights reserved.</p>
+</footer>
+
+<!-- ================= SHARED JAVASCRIPT ================= -->
+<script src="script.js"></script>
+
+<!-- ================= AUTHOR SEARCH SCRIPT ================= -->
+<script>
+    // Books by authors
+    const authorBooks = {
+        "Margaret Atwood": [
+            { title: "The Handmaid's Tale", price: 45.00, year: 1985 },
+            { title: "Oryx and Crake", price: 42.00, year: 2003 },
+            { title: "The Blind Assassin", price: 48.00, year: 2000 },
+            { title: "MaddAddam", price: 46.00, year: 2013 }
+        ],
+        "Haruki Murakami": [
+            { title: "Norwegian Wood", price: 43.00, year: 1987 },
+            { title: "Kafka on the Shore", price: 50.00, year: 2002 },
+            { title: "1Q84", price: 55.00, year: 2009 },
+            { title: "Dance Dance Dance", price: 40.00, year: 1988 }
+        ],
+        "Jane Austen": [
+            { title: "Pride and Prejudice", price: 38.00, year: 1813 },
+            { title: "Emma", price: 36.00, year: 1815 },
+            { title: "Sense and Sensibility", price: 35.00, year: 1811 },
+            { title: "Persuasion", price: 37.00, year: 1817 }
+        ]
+    };
+
+    function filterAuthors() {
+        const input = document.getElementById("authorSearch").value.toLowerCase();
+        const authors = document.querySelectorAll(".author-card");
+
+        authors.forEach(author => {
+            const name = author.dataset.name.toLowerCase();
+            author.style.display = name.includes(input) ? "block" : "none";
+        });
+    }
+
+    function showAuthorBooks(authorName) {
+        const modal = document.getElementById("booksModal");
+        const authorNameEl = document.getElementById("authorName");
+        const booksList = document.getElementById("booksList");
+
+        authorNameEl.textContent = "Books by " + authorName;
+        const books = authorBooks[authorName] || [];
+
+        booksList.innerHTML = "";
+        books.forEach(book => {
+            const bookCard = document.createElement("div");
+            bookCard.className = "author-book-card";
+            bookCard.innerHTML = `
+                <div class="author-book-cover" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); display: flex; align-items: center; justify-content: center; color: white; font-size: 40px;">
+                    <i class="fa-solid fa-book"></i>
+                </div>
+                <h3>${book.title}</h3>
+                <p><strong>Year:</strong> ${book.year}</p>
+                <p class="book-price">RM ${book.price.toFixed(2)}</p>
+                <button onclick="addToCart('${book.title}', ${book.price})">Add to Cart</button>
+            `;
+            booksList.appendChild(bookCard);
+        });
+
+        modal.style.display = "block";
+    }
+
+    function closeBooks() {
+        const modal = document.getElementById("booksModal");
+        modal.style.display = "none";
+    }
+
+    function addToCart(title, price) {
+        addBookToCart(title, price);
+        const cartTotal = parseFloat(localStorage.getItem('cartTotal')) || 0;
+        document.getElementById('cartTotal').innerText = cartTotal.toFixed(2);
+    }
+
+    // Close modal when clicking outside
+    window.onclick = function(event) {
+        const modal = document.getElementById("booksModal");
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+</script>
+</body>
+</html>

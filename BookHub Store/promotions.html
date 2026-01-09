@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BookHub Store - Promotions</title>
+
+    <!-- Font Awesome (same as Home) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- SAME CSS FILE -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- HEADER (SAME AS HOME PAGE) -->
+<header class="header">
+
+    <div class="logo">
+        <a href="home.html">
+            <img src="logo.png" alt="BookHub Logo">
+        </a>
+    </div>
+
+    <div class="search-bar">
+        <input type="text" id="promosearch" placeholder="Search for books, authors, categories" onkeypress="searchPromos(event)">
+        <button type="button" onclick="searchPromos()">Search</button>
+    </div>
+
+    <div class="login-section" id="authSection"></div>
+
+</header>
+
+<!-- TOP NAVIGATION (SAME AS HOME PAGE) -->
+<nav class="navbar top-nav">
+
+    <div class="nav-links">
+        <a href="promotions.html">Promotions</a>
+        <a href="stores.html">Store Locations</a>
+        <a href="authors.html">Authors</a>
+        <a href="categories.html">Categories</a>
+        <a href="about.html">About Us</a>
+        <a href="help.html">Help & Support</a>
+    </div>
+
+    <a href="payment.html" class="payment-section">
+        <i class="fa-solid fa-cart-shopping"></i>
+        RM <span id="cartTotal">0.00</span>
+    </a>
+
+</nav>
+
+<!-- PROMOTIONS SECTION -->
+<section class="new-arrivals">
+    <h2>Promotions</h2>
+
+    <div class="book-list">
+
+        <!-- Book 1 -->
+        <article class="book-item">
+            <div class="book-cover" style="background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%); display: flex; align-items: center; justify-content: center; color: white; font-size: 50px;">
+                <i class="fa-solid fa-code"></i>
+            </div>
+            <h3>Learning Web Design</h3>
+            <p><strong>Author:</strong> Jennifer Robbins</p>
+            <p><strong>Category:</strong> Technology / Web Development</p>
+            <p class="price-original"><strong>Original Price:</strong> <del>RM 85.00</del></p>
+            <p class="price-promo"><strong>Promo Price:</strong> RM 65.00</p>
+            <button onclick="addToCart('Learning Web Design', 65.00)">Add to Cart</button>
+        </article>
+
+        <!-- Book 2 -->
+        <article class="book-item">
+            <div class="book-cover" style="background: linear-gradient(135deg, #4ecdc4 0%, #44a08d 100%); display: flex; align-items: center; justify-content: center; color: white; font-size: 50px;">
+                <i class="fa-solid fa-laptop"></i>
+            </div>
+            <h3>Introduction to Computer Science</h3>
+            <p><strong>Author:</strong> David J. Eck</p>
+            <p><strong>Category:</strong> Computer Science</p>
+            <p class="price-original"><strong>Original Price:</strong> <del>RM 90.00</del></p>
+            <p class="price-promo"><strong>Promo Price:</strong> RM 70.00</p>
+            <button onclick="addToCart('Introduction to Computer Science', 70.00)">Add to Cart</button>
+        </article>
+
+        <!-- Book 3 -->
+        <article class="book-item">
+            <div class="book-cover" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); display: flex; align-items: center; justify-content: center; color: white; font-size: 50px;">
+                <i class="fa-solid fa-pen-nib"></i>
+            </div>
+            <h3>Academic Writing Skills</h3>
+            <p><strong>Author:</strong> Alice Savage</p>
+            <p><strong>Category:</strong> Education / Writing</p>
+            <p class="price-original"><strong>Original Price:</strong> <del>RM 60.00</del></p>
+            <p class="price-promo"><strong>Promo Price:</strong> RM 45.00</p>
+            <button onclick="addToCart('Academic Writing Skills', 45.00)">Add to Cart</button>
+        </article>
+
+        <!-- Book 4 -->
+        <article class="book-item">
+            <div class="book-cover" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); display: flex; align-items: center; justify-content: center; color: white; font-size: 50px;">
+                <i class="fa-solid fa-bullhorn"></i>
+            </div>
+            <h3>Digital Marketing Basics</h3>
+            <p><strong>Author:</strong> Ryan Deiss</p>
+            <p><strong>Category:</strong> Business / Marketing</p>
+            <p class="price-original"><strong>Original Price:</strong> <del>RM 75.00</del></p>
+            <p class="price-promo"><strong>Promo Price:</strong> RM 55.00</p>
+            <button onclick="addToCart('Digital Marketing Basics', 55.00)">Add to Cart</button>
+        </article>
+
+        <!-- Book 5 -->
+        <article class="book-item">
+            <div class="book-cover" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); display: flex; align-items: center; justify-content: center; color: white; font-size: 50px;">
+                <i class="fa-solid fa-chart-line"></i>
+            </div>
+            <h3>Data Science for Beginners</h3>
+            <p><strong>Author:</strong> Andrew Park</p>
+            <p><strong>Category:</strong> Data & Analytics</p>
+            <p class="price-original"><strong>Original Price:</strong> <del>RM 95.00</del></p>
+            <p class="price-promo"><strong>Promo Price:</strong> RM 72.00</p>
+            <button onclick="addToCart('Data Science for Beginners', 72.00)">Add to Cart</button>
+        </article>
+
+        <!-- Book 6 -->
+        <article class="book-item">
+            <div class="book-cover" style="background: linear-gradient(135deg, #ff9a56 0%, #ff6a88 100%); display: flex; align-items: center; justify-content: center; color: white; font-size: 50px;">
+                <i class="fa-solid fa-book"></i>
+            </div>
+            <h3>The Silent River</h3>
+            <p><strong>Author:</strong> Michael Chen</p>
+            <p><strong>Category:</strong> Fiction</p>
+            <p class="price-original"><strong>Original Price:</strong> <del>RM 55.00</del></p>
+            <p class="price-promo"><strong>Promo Price:</strong> RM 42.00</p>
+            <button onclick="addToCart('The Silent River', 42.00)">Add to Cart</button>
+        </article>
+
+        <!-- Book 7 -->
+        <article class="book-item">
+            <div class="book-cover" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%); display: flex; align-items: center; justify-content: center; color: #333; font-size: 50px;">
+                <i class="fa-solid fa-heart"></i>
+            </div>
+            <h3>Forever Hearts</h3>
+            <p><strong>Author:</strong> Sarah Williams</p>
+            <p><strong>Category:</strong> Romance</p>
+            <p class="price-original"><strong>Original Price:</strong> <del>RM 58.00</del></p>
+            <p class="price-promo"><strong>Promo Price:</strong> RM 48.00</p>
+            <button onclick="addToCart('Forever Hearts', 48.00)">Add to Cart</button>
+        </article>
+
+        <!-- Book 8 -->
+        <article class="book-item">
+            <div class="book-cover" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); display: flex; align-items: center; justify-content: center; color: white; font-size: 50px;">
+                <i class="fa-solid fa-dragon"></i>
+            </div>
+            <h3>Dragon's Realm</h3>
+            <p><strong>Author:</strong> Robert Martin</p>
+            <p><strong>Category:</strong> Fantasy</p>
+            <p class="price-original"><strong>Original Price:</strong> <del>RM 65.00</del></p>
+            <p class="price-promo"><strong>Promo Price:</strong> RM 50.00</p>
+            <button onclick="addToCart('Dragon\'s Realm', 50.00)">Add to Cart</button>
+        </article>
+
+        <!-- Book 9 -->
+        <article class="book-item">
+            <div class="book-cover" style="background: linear-gradient(135deg, #d32f2f 0%, #b71c1c 100%); display: flex; align-items: center; justify-content: center; color: white; font-size: 50px;">
+                <i class="fa-solid fa-ghost"></i>
+            </div>
+            <h3>Shadows of Fear</h3>
+            <p><strong>Author:</strong> Jessica Parker</p>
+            <p><strong>Category:</strong> Horror</p>
+            <p class="price-original"><strong>Original Price:</strong> <del>RM 52.00</del></p>
+            <p class="price-promo"><strong>Promo Price:</strong> RM 32.00</p>
+            <button onclick="addToCart('Shadows of Fear', 32.00)">Add to Cart</button>
+        </article>
+
+        <!-- Book 10 -->
+        <article class="book-item">
+            <div class="book-cover" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); display: flex; align-items: center; justify-content: center; color: white; font-size: 50px;">
+                <i class="fa-solid fa-microchip"></i>
+            </div>
+            <h3>Cyber Nexus</h3>
+            <p><strong>Author:</strong> Alex Turner</p>
+            <p><strong>Category:</strong> Science Fiction</p>
+            <p class="price-original"><strong>Original Price:</strong> <del>RM 70.00</del></p>
+            <p class="price-promo"><strong>Promo Price:</strong> RM 58.00</p>
+            <button onclick="addToCart('Cyber Nexus', 58.00)">Add to Cart</button>
+        </article>
+
+        <!-- Book 11 -->
+        <article class="book-item">
+            <div class="book-cover" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); display: flex; align-items: center; justify-content: center; color: white; font-size: 50px;">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </div>
+            <h3>Murder at Midnight</h3>
+            <p><strong>Author:</strong> James Mitchell</p>
+            <p><strong>Category:</strong> Mystery</p>
+            <p class="price-original"><strong>Original Price:</strong> <del>RM 62.00</del></p>
+            <p class="price-promo"><strong>Promo Price:</strong> RM 44.00</p>
+            <button onclick="addToCart('Murder at Midnight', 44.00)">Add to Cart</button>
+        </article>
+
+        <!-- Book 12 -->
+        <article class="book-item">
+            <div class="book-cover" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); display: flex; align-items: center; justify-content: center; color: white; font-size: 50px;">
+                <i class="fa-solid fa-lightbulb"></i>
+            </div>
+            <h3>Mind Power</h3>
+            <p><strong>Author:</strong> Dr. Emma Rogers</p>
+            <p><strong>Category:</strong> Self-Help</p>
+            <p class="price-original"><strong>Original Price:</strong> <del>RM 52.00</del></p>
+            <p class="price-promo"><strong>Promo Price:</strong> RM 38.00</p>
+            <button onclick="addToCart('Mind Power', 38.00)">Add to Cart</button>
+        </article>
+
+        <!-- Book 13 -->
+        <article class="book-item">
+            <div class="book-cover" style="background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%); display: flex; align-items: center; justify-content: center; color: white; font-size: 50px;">
+                <i class="fa-solid fa-scroll"></i>
+            </div>
+            <h3>Kings and Kingdoms</h3>
+            <p><strong>Author:</strong> Professor Thomas</p>
+            <p><strong>Category:</strong> History</p>
+            <p class="price-original"><strong>Original Price:</strong> <del>RM 65.00</del></p>
+            <p class="price-promo"><strong>Promo Price:</strong> RM 50.00</p>
+            <button onclick="addToCart('Kings and Kingdoms', 50.00)">Add to Cart</button>
+        </article>
+
+        <!-- Book 14 -->
+        <article class="book-item">
+            <div class="book-cover" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%); display: flex; align-items: center; justify-content: center; color: #333; font-size: 50px;">
+                <i class="fa-solid fa-briefcase"></i>
+            </div>
+            <h3>Start Your Business</h3>
+            <p><strong>Author:</strong> Mark Stewart</p>
+            <p><strong>Category:</strong> Business</p>
+            <p class="price-original"><strong>Original Price:</strong> <del>RM 75.00</del></p>
+            <p class="price-promo"><strong>Promo Price:</strong> RM 55.00</p>
+            <button onclick="addToCart('Start Your Business', 55.00)">Add to Cart</button>
+        </article>
+
+        <!-- Book 15 -->
+        <article class="book-item">
+            <div class="book-cover" style="background: linear-gradient(135deg, #4ecdc4 0%, #44a08d 100%); display: flex; align-items: center; justify-content: center; color: white; font-size: 50px;">
+                <i class="fa-solid fa-rocket"></i>
+            </div>
+            <h3>AI and Machine Learning</h3>
+            <p><strong>Author:</strong> Dr. Nina Patel</p>
+            <p><strong>Category:</strong> Technology</p>
+            <p class="price-original"><strong>Original Price:</strong> <del>RM 95.00</del></p>
+            <p class="price-promo"><strong>Promo Price:</strong> RM 85.00</p>
+            <button onclick="addToCart('AI and Machine Learning', 85.00)">Add to Cart</button>
+        </article>
+
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+    <p>&copy; 2025 BookHub Store. All rights reserved.</p>
+</footer>
+
+<!-- SAME JAVASCRIPT FILE -->
+<script src="script.js"></script>
+
+<script>
+    const promosBooks = [
+        { title: "Learning Web Design", price: 65.00 },
+        { title: "Introduction to Computer Science", price: 70.00 },
+        { title: "Academic Writing Skills", price: 45.00 },
+        { title: "Digital Marketing Basics", price: 55.00 },
+        { title: "Data Science for Beginners", price: 72.00 },
+        { title: "The Silent River", price: 42.00 },
+        { title: "Forever Hearts", price: 48.00 },
+        { title: "Dragon's Realm", price: 50.00 },
+        { title: "Shadows of Fear", price: 32.00 },
+        { title: "Cyber Nexus", price: 58.00 },
+        { title: "Murder at Midnight", price: 44.00 },
+        { title: "Mind Power", price: 38.00 },
+        { title: "Kings and Kingdoms", price: 50.00 },
+        { title: "Start Your Business", price: 55.00 },
+        { title: "AI and Machine Learning", price: 85.00 }
+    ];
+
+    function searchPromos(event) {
+        if (event && event.key && event.key !== 'Enter') return;
+        
+        const keyword = document.getElementById('promosearch').value.toLowerCase().trim();
+        if (!keyword) {
+            alert('Please enter a search term');
+            return;
+        }
+
+        const results = promosBooks.filter(book => book.title.toLowerCase().includes(keyword));
+        
+        if (results.length === 0) {
+            alert('No promo books found matching "' + keyword + '". Try searching in Categories for more options.');
+            return;
+        }
+
+        let searchResults = 'Found ' + results.length + ' promo book(s):\n\n';
+        results.forEach(book => {
+            searchResults += '• ' + book.title + ' (RM ' + book.price.toFixed(2) + ')\n';
+        });
+        searchResults += '\nGo to Categories page for more books?';
+        
+        if (confirm(searchResults)) {
+            window.location.href = 'categories.html?search=' + encodeURIComponent(keyword);
+        }
+    }
+
+    function addToCart(title, price) {
+        addBookToCart(title, price);
+        const cartTotal = parseFloat(localStorage.getItem('cartTotal')) || 0;
+        document.getElementById('cartTotal').innerText = cartTotal.toFixed(2);
+    }
+</script>
+
+</body>
+</html>
